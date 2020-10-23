@@ -5,10 +5,13 @@ I made this doorbell camera because I wasn't happy with what I could find alread
 
 Features
 * Designed specifically for use with home assistant
-* Upto 4 simultanious clients - this allows for example a recording stream with additional clients watching
-* Maintain approx 12fps for upto 3 simultaniuous streams dropping to about 10fps when the 4th connects.  Note this is *highly dependent* on a good wifi connection.
-* Request different (lower) frame rates via the stream url parameters
-* Identify a *priority stream* via the stream url parameters
+* No cloud subscriptions required
+* Upto 4 simultanious clients (mjpeg streams) - this allows for example a recording stream with additional clients watching.
+* Maintain approx 12fps for upto 3 simultaniuous streams dropping to about 10fps when the 4th connects.  Note this is *highly dependent* on a good wifi connection and will drop if the wifi is poor quality, conjested or interrupted.
+* Request different (lower) frame rates via the stream url parameters.  Maybe use for a time lapse?
+* Identify a *priority stream* via the stream url parameters.  For example prioritise the recording stream.
 * Capture stream with upto 2sec of history selected via the stream url parameters.  For example when capturing a recording start recording from 2sec back in time.
+* MQTT json for configuration of key camera settings.  Ideal for changing to low light settings at sunset.
+* MQTT inputs (3 general purpose) for doorbell button, IR sensor, etc.
 
 
