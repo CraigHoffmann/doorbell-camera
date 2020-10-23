@@ -11,7 +11,7 @@ Features
 * Request different (lower) frame rates via the stream url parameters.  Maybe use for a time lapse?
 * Identify a *priority stream* via the stream url parameters.  For example prioritise the recording stream.
 * Capture stream with upto 2sec of history selected via the stream url parameters.  For example when capturing a recording start recording from 2sec back in time.
-* MQTT json for configuration of key camera settings.  Ideal for changing to low light settings at sunset.
+* MQTT json for configuration of key camera settings.  Ideal for changing to low light settings at sunset via home assistant.
 * MQTT inputs (3 general purpose) for doorbell button, IR sensor, etc.
 
 
