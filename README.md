@@ -7,7 +7,7 @@ Features
 * Designed specifically for use with home assistant
 * No cloud subscriptions required
 * Upto 4 simultanious clients (mjpeg streams) - this allows for example a recording stream with additional clients watching.
-* Maintain approx 12fps for upto 3 simultaniuous streams dropping to about 10fps when the 4th connects.  Note this is *highly dependent* on a good wifi connection and will drop if the wifi is poor quality, conjested or interrupted.
+* Maintain approx 12fps for upto 3 simultaniuous streams XGA:1024x768, dropping to about 10fps when the 4th connects.  Note this is *highly dependent* on a good wifi connection and will drop if the wifi is poor quality, conjested or interrupted.
 * Request different (lower) frame rates via the stream url parameters.  Maybe use for a time lapse?
 * Identify a *priority stream* via the stream url parameters.  For example prioritise the recording stream.
 * Capture stream with upto 2sec of history selected via the stream url parameters.  For example when capturing a recording start recording from 2sec back in time.
