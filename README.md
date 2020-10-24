@@ -15,3 +15,16 @@ Features
 * MQTT inputs (3 general purpose) for doorbell button, IR sensor, etc.
 
 
+Home Assistant setup notes
+
+Recording
+
+Prerequisites
+1. make sure you have ffmpeg installed in home assistant
+2. whitelist the directory to be used for saving recordings
+
+Because this camera uses mjep streams we use **ffmpeg** to make the recordings.
+If just want a raw capture of mjpeg stream use:
+Note I have noticed while this is fine for playback via most dedicated media players, it doesn't play back in the new home assistant media browser, I suspect something is missing from the stream information?
+
+The solution to enable playback using home assistant media browser is to use ffmpeg to recode the stream in a format that will work.  Now you can do this in one go with ffmeg however I have noticed that on my home assistant rpi3b+ it struggles to recode the stream without dropping frames.  This was easily fixed by just doing it in two steps 1. capture the mjpeg stream as is, and 2. when capture complete recode the stream.  I used a shell script to do this.
