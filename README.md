@@ -3,7 +3,9 @@ by Craig Hoffmann
 
 I made this doorbell camera because I wasn't happy with what I could find already (and I just like making things).  There are a number of key features that make this different from most other (at time of writing) implementations available.  It is based on code from XXXXXXX however at this point the code has been largely restructured and has deviated  significantly from the original - however without the original, this version would probably have never eventuated, so thank you.  
 
-![doorbell](https://github.com/CraigHoffmann/doorbell-camera/blob/main/Images/doorbell.jpg?raw=true)
+Camera    |  Wide Lens
+:-------------------------:|:-------------------------:
+![doorbell](https://github.com/CraigHoffmann/doorbell-camera/blob/main/Images/doorbell.jpg?raw=true) |  ![doorbell](https://github.com/CraigHoffmann/doorbell-camera/blob/main/Images/ov2640wide.jpg?raw=true)
 
 ## Features ##
 * Designed specifically for use with home assistant
@@ -16,6 +18,15 @@ I made this doorbell camera because I wasn't happy with what I could find alread
 * MQTT json for configuration of key camera settings.  Ideal for changing to low light settings at sunset via home assistant.
 * MQTT inputs (3 general purpose) for doorbell button, IR sensor, etc.
 
+Video quality is average but acceptable, jpeg compression had to be set such that frame rates could be achieved achieved and maintained while not running out of memory.  A balance was made between the image size, fps, and number of streams that could be maintained... the result is pretty much everything is on the limit of the ESP32-cam module.  I originally had a Chinese 1080p HD video dooorbell and while the image was much sharper, it suffered constant disconnects, stuttering and missed rings due the the cloud connection required and in the end it just wasn't what I wanted.  While the video quality of this design is not as good, that is far less important to me than having the camera reliable with almost instant connection response via home assistant (and no cloud subscription required). 
+
+Sample video...
+
+## Build Notes ##
+
+The camera is based on an ESP32-cam board, however the camera/lense has been replaced by a wide angle version from banggood.  I bough 3 wide angle lenses for about $15.  The original camera lense just unplugs and the new one plugged in.  The unit uses "wired 5V" power and an external antenna - this makes a **big difference** to the consistency of the video streams.
+
+I designed a 3D printed case that uses a piece of clear plastic from an old CD case to provide a weather proof window for the camera.
 
 ## Home Assistant setup notes ##
 
