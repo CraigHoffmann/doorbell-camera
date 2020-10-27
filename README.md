@@ -3,7 +3,7 @@ by Craig Hoffmann
 
 I made this doorbell camera because I wasn't happy with what I could find already (and I just like making things).  There are a number of key features that make this different from most other (at time of writing) implementations available.  It is based on code from XXXXXXX however at this point the code has been largely restructured and has deviated  significantly from the original - however without the original, this version would probably have never eventuated, so thank you.  
 
-Features
+## Features ##
 * Designed specifically for use with home assistant
 * No cloud subscriptions required
 * Upto 4 simultanious clients (mjpeg streams) - this allows for example a recording stream with additional clients watching.
@@ -15,16 +15,43 @@ Features
 * MQTT inputs (3 general purpose) for doorbell button, IR sensor, etc.
 
 
-Home Assistant setup notes
+## Home Assistant setup notes ##
 
-Recording
+### Camera Setup ###
+
+```YAML
+camera:
+  - platform: mjpeg
+    name: esp32 doorbell camera
+    still_image_url: http://10.0.0.43/jpg        # replace ip with your camera ip
+    mjpeg_url: http://10.0.0.43/mjpeg/1          # replace ip with your camera ip
+    verify_ssl: false  
+```
+
+There are a few url parameters you can add to the mjpeg stream as follows:
+
+```
+http://10.0.0.43/mjpeg/1?back=10      # This will display the stream but 10 frames 'back in time' upto 24 frames (approx 2sec) back
+http://10.0.0.43/mjpeg/1?fps=3        # Request a specific FPS between 1 and 12
+http://10.0.0.43/mjpeg/1?priority=1   # Prioritise this stream - ie for recording
+```
+
+### Recording Video and Media Browser ###
 
 Prerequisites
 1. make sure you have ffmpeg installed in home assistant
-2. whitelist the directory to be used for saving recordings
+2. whitelist the directory to be used for saving recordings (I use www/cam_captures in the home assistant config directory) 
 
 Because this camera uses mjep streams we use **ffmpeg** to make the recordings.
 If just want a raw capture of mjpeg stream use:
+
+```
+shell_command:
+  record_cam1: 'ffmpeg -r 12 -i http://10.0.0.43/mjpeg/1 -c copy -y -frames:v 150 /config/www/cam_captures/recording.avi'
+```
+
 Note I have noticed while this is fine for playback via most dedicated media players, it doesn't play back in the new home assistant media browser, I suspect something is missing from the stream information?
 
 The solution to enable playback using home assistant media browser is to use ffmpeg to recode the stream in a format that will work.  Now you can do this in one go with ffmeg however I have noticed that on my home assistant rpi3b+ it struggles to recode the stream without dropping frames.  This was easily fixed by just doing it in two steps 1. capture the mjpeg stream as is, and 2. when capture complete recode the stream.  I used a shell script to do this.
+
+
