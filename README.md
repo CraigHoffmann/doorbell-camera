@@ -19,6 +19,7 @@ I made this doorbell camera because I wasn't happy with what I could find alread
 
 ### Camera Setup ###
 
+Add the following to configuration.yaml
 ```YAML
 camera:
   - platform: mjpeg
@@ -42,16 +43,32 @@ Prerequisites
 1. make sure you have ffmpeg installed in home assistant
 2. whitelist the directory to be used for saving recordings (I use www/cam_captures in the home assistant config directory) 
 
-Because this camera uses mjep streams we use **ffmpeg** to make the recordings.
-If just want a raw capture of mjpeg stream use:
-
 ```
+# Allow shell command access to directory for saving video
+homeassistant:
+  whitelist_external_dirs:
+    - /config/www/cam_captures           # This is so we can record them
+  media_dirs:
+    cameras: /config/www/cam_captures    # This is so media browser can acces them
+```
+
+Because this camera uses mjep streams we use **ffmpeg** to make the recordings.  If just want a raw capture of mjpeg stream use:
+
+In configuration.yaml (change IP and path to yours)
+```YAML
 shell_command:
   record_cam1: 'ffmpeg -r 12 -i http://10.0.0.43/mjpeg/1 -c copy -y -frames:v 150 /config/www/cam_captures/recording.avi'
 ```
 
-Note I have noticed while this is fine for playback via most dedicated media players, it doesn't play back in the new home assistant media browser, I suspect something is missing from the stream information?
+and then call record_cam1 in your automation.yaml as required.
 
-The solution to enable playback using home assistant media browser is to use ffmpeg to recode the stream in a format that will work.  Now you can do this in one go with ffmeg however I have noticed that on my home assistant rpi3b+ it struggles to recode the stream without dropping frames.  This was easily fixed by just doing it in two steps 1. capture the mjpeg stream as is, and 2. when capture complete recode the stream.  I used a shell script to do this.
+**Note** I have noticed while this is fine for playback via most dedicated media players, it doesn't play back in the new home assistant media browser, I suspect something is missing from the stream information?
+
+The solution to enable playback using home assistant media browser is to use ffmpeg to recode the stream in a format that will work.  Now you can do this in one go with ffmeg however I have noticed that on my home assistant rpi3b+ it struggles to recode the stream without dropping frames.  This was easily fixed by just doing it in two steps 1. capture the mjpeg stream as is, and 2. when capture complete recode the stream.  I use a bash shell script to do this as it was easier to edit the bash script and retest without reloading the configuration.yaml.
+
+Create a file called record_mp4.sh in you config/shell_scripts directory (create dir if not there)
+
+
+
 
 
