@@ -66,9 +66,24 @@ and then call record_cam1 in your automation.yaml as required.
 
 The solution to enable playback using home assistant media browser is to use ffmpeg to recode the stream in a format that will work.  Now you can do this in one go with ffmeg however I have noticed that on my home assistant rpi3b+ it struggles to recode the stream without dropping frames.  This was easily fixed by just doing it in two steps 1. capture the mjpeg stream as is, and 2. when capture complete recode the stream.  I use a bash shell script to do this as it was easier to edit the bash script and retest without reloading the configuration.yaml.
 
-Create a file called record_mp4.sh in you config/shell_scripts directory (create dir if not there)
+Create a file called record_mjpeg.sh in the config/shell_scripts directory (create dir if not there)
+```BASH
+#!/bin/bash
 
+folder=/config/www/cam_captures
+tmp_file=tmp_$(date +"%y%m%d%H%M%S")
+mpg_file=door_$(date +"%y-%m-%d_%H-%M-%S")
+http_url=http://10.0.0.43/mjpeg/1
 
+ffmpeg -i $http_url -c:v copy -y -frames:v 180 $folder/$tmp_file.avi
+ffmpeg -r 12 -i $folder/$tmp_file.avi -c:v libx264 -preset veryfast -y -vf "fps=12,format=yuv420p" $folder/$mpg_file.mp4
+rm $folder/$tmp_file.avi
+```
+and in configuration.yaml use
+```YAML
+shell_command:
+  record_cmd: '/config/shell_scripts/record_mjpeg.sh'
+```
 
 
 
