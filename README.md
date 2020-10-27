@@ -28,6 +28,29 @@ The camera is based on an ESP32-cam board, however the camera/lense has been rep
 
 I designed a 3D printed case that uses a piece of clear plastic from an old CD case to provide a weather proof window for the camera.
 
+## MQTT ##
+
+MQTT is used to provide notification of when any of the three inputs are triggered, one typically used for the doorbell button.  It is also used to send camera configuration to the doorbell with a json payload.  I use this to change the settings for low light at dusk/night and then back to normal in the morning.  If only one or two parameters need to be changed then just include those required in the json payload.
+
+```JSON
+{
+  "brightness":0,
+  "contrast":0,
+  "saturation":0,
+  "effect":0,
+  "whitebal":1,
+  "awb_gain":1,
+  "wb_mode":0,
+  "exposure_ctrl":1,
+  "aec2":0,
+  "ae_level":0,
+  "aec_value":300,
+  "gain_ctrl":0,
+  "agc_gain":3,
+  "gainceiling":1
+}
+```
+
 ## Home Assistant setup notes ##
 
 ### Camera Setup ###
