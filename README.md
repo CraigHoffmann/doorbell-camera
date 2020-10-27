@@ -3,6 +3,8 @@ by Craig Hoffmann
 
 I made this doorbell camera because I wasn't happy with what I could find already (and I just like making things).  There are a number of key features that make this different from most other (at time of writing) implementations available.  It is based on code from XXXXXXX however at this point the code has been largely restructured and has deviated  significantly from the original - however without the original, this version would probably have never eventuated, so thank you.  
 
+![doorbell](https://github.com/CraigHoffmann/doorbell-camera/blob/master/Images/doorbell.jpg?raw=true)
+
 ## Features ##
 * Designed specifically for use with home assistant
 * No cloud subscriptions required
