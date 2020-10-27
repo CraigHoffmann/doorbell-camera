@@ -1,7 +1,7 @@
 # ESP32-cam Multiclient Doorbell Camera
 by Craig Hoffmann
 
-I made this doorbell camera because I wasn't happy with what I could find already (and I just like making things).  There are a number of key features that make this different from most other (at time of writing) implementations available.  It is based on code from [Anatoli Arkhipenko](https://www.hackster.io/anatoli-arkhipenko/multi-client-mjpeg-streaming-from-esp32-47768f) however at this point the code has been largely restructured and has deviated  significantly from the original - however without the original, this version would probably have never eventuated, so thank you.  
+I made this doorbell camera because I wasn't happy with what I could find already, and I just like making things!  There are a number of key features that make this different (at time of writing) from most other implementations available.  It is based on code from [Anatoli Arkhipenko](https://www.hackster.io/anatoli-arkhipenko/multi-client-mjpeg-streaming-from-esp32-47768f) although at this point the code has been largely restructured and has deviated  significantly from the original - however without the original, this version would probably have never eventuated, so thank you.  
 
 Camera    |  Wide Lens
 :-------------------------:|:-------------------------:
