@@ -54,10 +54,10 @@ homeassistant:
 
 Because this camera uses mjep streams we use **ffmpeg** to make the recordings.  If just want a raw capture of mjpeg stream use:
 
-In configuration.yaml (change IP and path to yours)
+In configuration.yaml you can call ffmpeg directly using a shell_command (change IP and path to yours)
 ```YAML
 shell_command:
-  record_cam1: 'ffmpeg -r 12 -i http://10.0.0.43/mjpeg/1 -c copy -y -frames:v 150 /config/www/cam_captures/recording.avi'
+  record_cam1: 'ffmpeg -r 12 -i http://10.0.0.43/mjpeg/1 -c copy -y -frames:v 180 /config/www/cam_captures/recording.avi'
 ```
 
 and then call record_cam1 in your automation.yaml as required.
