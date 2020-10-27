@@ -73,7 +73,7 @@ Create a file called record_mjpeg.sh in the config/shell_scripts directory (crea
 folder=/config/www/cam_captures
 tmp_file=tmp_$(date +"%y%m%d%H%M%S")
 mpg_file=door_$(date +"%y-%m-%d_%H-%M-%S")
-http_url=http://10.0.0.43/mjpeg/1
+http_url=http://10.0.0.43/mjpeg/1?back=24
 
 ffmpeg -i $http_url -c:v copy -y -frames:v 180 $folder/$tmp_file.avi
 ffmpeg -r 12 -i $folder/$tmp_file.avi -c:v libx264 -preset veryfast -y -vf "fps=12,format=yuv420p" $folder/$mpg_file.mp4
